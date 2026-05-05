@@ -4,7 +4,7 @@
 
 Se creó la carpeta `types/` con el fichero `Anime.ts` para separar el tipado del resto del código.
 
-![Tipos](tipos.png)
+![Tipos](../assets/images/tipos.png)
 
 Se usa un **tipo union** para `AnimeCategoria` en lugar de `string` para que TypeScript impida en tiempo de compilación usar una categoría que no exista.
 
@@ -20,7 +20,7 @@ import { Anime, AnimeCategoria } from "../types/Anime";
 ```
 
 ### Imagen por categoría
-![Categorias](categorias.png)
+![Categorias](../assets/images/categorias.png)
 
 ### Estado principal
 
