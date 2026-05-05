@@ -37,8 +37,6 @@ const ANIMES_INICIALES: Anime[] = [
 export default function AnimeList() {
 
   const [animes, setAnimes] = useState<Anime[]>(ANIMES_INICIALES);
-
-  // Estados del modal
   const [modalVisible, setModalVisible] = useState(false);
   const [formNombre, setFormNombre] = useState("");
   const [formPrecio, setFormPrecio] = useState("");
@@ -59,6 +57,10 @@ export default function AnimeList() {
 
   const borrarAnime = (id: string) => {
     setAnimes((prev) => prev.filter((a) => a.id !== id));
+  };
+
+  const borrarTodos = () => {
+    setAnimes([]);
   };
 
   const añadirAnime = () => {
@@ -111,43 +113,62 @@ export default function AnimeList() {
       </View>
 
       
-      <TouchableOpacity style={styles.btnAñadir} onPress={() => setModalVisible(true)}>
-        <Text style={styles.btnAñadirText}>+ Añadir Anime</Text>
-      </TouchableOpacity>
+      <View style={styles.botones}>
+        <TouchableOpacity style={styles.btnAñadir} onPress={() => setModalVisible(true)}>
+          <Text style={styles.btnAñadirText}>+ Añadir Anime</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.btnBorrarTodo, totalAnimes === 0 && styles.btnDeshabilitado]}
+          onPress={borrarTodos}
+          disabled={totalAnimes === 0}
+        >
+          <Text style={styles.btnBorrarTodoText}>🗑 Vaciar lista</Text>
+        </TouchableOpacity>
+      </View>
 
       
-      <FlatList
-        data={animes}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={[styles.card, item.marcado && styles.cardMarcada]}>
-            <Image source={CATEGORIA_IMAGENES[item.categoria]} style={styles.image} />
-            <View style={styles.info}>
-              <Text style={[styles.name, item.marcado && styles.nameMarcado]}>
-                {item.nombre}
-              </Text>
-              <Text style={styles.category}>{item.categoria}</Text>
-              <Text style={styles.price}>{item.precio} M USD</Text>
-              {item.marcado && <Text style={styles.vistoBadge}>✅ Visto</Text>}
+      {animes.length === 0 ? (
+        <View style={styles.listaVacia}>
+          <Text style={styles.listaVaciaEmoji}>📭</Text>
+          <Text style={styles.listaVaciaTexto}>
+            Tu lista está vacía.{"\n"}¡Añade tu primer anime!
+          </Text>
+        </View>
+      ) : (
+        <FlatList
+          data={animes}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={[styles.card, item.marcado && styles.cardMarcada]}>
+              <Image source={CATEGORIA_IMAGENES[item.categoria]} style={styles.image} />
+              <View style={styles.info}>
+                <Text style={[styles.name, item.marcado && styles.nameMarcado]}>
+                  {item.nombre}
+                </Text>
+                <Text style={styles.category}>{item.categoria}</Text>
+                <Text style={styles.price}>{item.precio} M USD</Text>
+                {item.marcado && <Text style={styles.vistoBadge}>✅ Visto</Text>}
+              </View>
+              <View style={styles.actions}>
+                <TouchableOpacity
+                  style={[styles.btnMarca, item.marcado && styles.btnMarcaActivo]}
+                  onPress={() => toggleMarcado(item.id)}
+                >
+                  <Text style={styles.btnMarcaText}>{item.marcado ? "★" : "☆"}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.btnEliminar}
+                  onPress={() => borrarAnime(item.id)}
+                >
+                  <Text style={styles.btnEliminarText}>🗑</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={styles.actions}>
-              <TouchableOpacity
-                style={[styles.btnMarca, item.marcado && styles.btnMarcaActivo]}
-                onPress={() => toggleMarcado(item.id)}
-              >
-                <Text style={styles.btnMarcaText}>{item.marcado ? "★" : "☆"}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.btnEliminar}
-                onPress={() => borrarAnime(item.id)}
-              >
-                <Text style={styles.btnEliminarText}>🗑</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-      />
+          )}
+        />
+      )}
 
+      
       <Modal visible={modalVisible} transparent animationType="slide" onRequestClose={cerrarModal}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
@@ -238,18 +259,55 @@ const styles = StyleSheet.create({
     color: "#888",
     marginTop: 2
   },
+  botones: {
+    flexDirection: "row",
+    gap: 10,
+    marginBottom: 12
+  },
   btnAñadir: {
+    flex: 1,
     backgroundColor: "#d41515",
     paddingVertical: 12,
     borderRadius: 10,
     alignItems: "center",
-    marginBottom: 12,
     elevation: 3
   },
   btnAñadirText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 15
+  },
+  btnBorrarTodo: {
+    flex: 1,
+    backgroundColor: "#7D6E83",
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: "center",
+    elevation: 3
+  },
+  btnBorrarTodoText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 15
+  },
+  btnDeshabilitado: {
+    backgroundColor: "#ccc",
+    elevation: 0
+  },
+  listaVacia: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  listaVaciaEmoji: {
+    fontSize: 60,
+    marginBottom: 16
+  },
+  listaVaciaTexto: {
+    fontSize: 18,
+    color: "#888",
+    textAlign: "center",
+    lineHeight: 26
   },
   card: {
     backgroundColor: "#fffffa",
