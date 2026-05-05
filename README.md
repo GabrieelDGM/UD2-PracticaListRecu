@@ -1,52 +1,59 @@
-📝 Lista de Anime — Proyecto React Native (Expo)
-🎯 Objetivo del Proyecto
+# 🎌 PGL-MyList-Anime
 
-Este proyecto tiene como objetivo crear una aplicación móvil en React Native (Expo) que permita visualizar una lista de animes con su nombre, categoría y precio aproximado.
-El diseño sigue la estructura de una lista tipo “cards” con una pantalla de inicio (portada) y una pantalla de listado.
+Aplicación móvil desarrollada con **React Native (Expo)** para gestionar una lista personal de animes. Permite añadir, marcar como vistos y eliminar animes, con indicadores numéricos en tiempo real.
 
-📱 Diseño General de la Aplicación
-🏠 Pantalla de Inicio (index.tsx)
+---
 
-Muestra el título principal “Lista de Anime”.
+## ¿Qué hace la aplicación?
 
-Fondo con imagen usando ImageBackground.
+La aplicación consta de dos pantallas:
 
-Un botón “Ver Animes” que sirve como transición hacia la lista.
+**Pantalla de inicio (`index.tsx`)**
+Muestra una portada con imagen de fondo, el título de la app y un botón para acceder a la lista.
 
-Se ha cuidado la estética, con colores personalizados, sombras y tipografía clara.
+**Pantalla de lista (`list.tsx`)**
+Es la pantalla principal. Permite:
+- Ver todos los animes añadidos en tarjetas individuales
+- Consultar tres indicadores numéricos: total de animes, cuántos están marcados como vistos y el precio total acumulado de los vistos
+- Añadir nuevos animes mediante un formulario en modal
+- Marcar o desmarcar cada anime como visto individualmente
+- Eliminar animes de forma individual
+- Vaciar la lista completa con un solo botón (deshabilitado si no hay nada)
+- Ver un mensaje informativo cuando la lista está vacía
 
-📋 Pantalla de Lista (list.tsx)
+---
 
-Muestra un listado de animes con:
+##  Documentación por ejercicios
+[Ejercicio Uno](docs/ejercicioUno.md)
+[Ejercicio Dos](docs/ejercicioDos.md)
+[Ejercicio Tres](docs/ejercicioTres.md)
+[Ejercicio Cuatro](docs/ejercicioCuatro.md)
+[Ejercicio Cinco](docs/ejercicioCinco.md)
+---
 
-🖋️ Nombre del anime
+## 🗂️ Estructura del proyecto
+![Estructura](assets/images/estructura.png)
 
-🎭 Categoría o género japonés principal
+## Tecnologías utilizadas
 
-💰 Costo aproximado de producción
+| Tecnología | Uso |
+|------------|-----|
+| React Native + Expo | Framework principal de la app |
+| TypeScript | Tipado estático del código |
+| Expo Router | Navegación entre pantallas |
+| `uuid` (v4) | Generación de IDs únicos para cada anime |
+| `useState` | Gestión del estado de la lista y el formulario |
+| `FlatList` | Renderizado eficiente de la lista |
+| `Modal` | Ventana emergente para el formulario de añadir |
 
-El listado se genera con un FlatList.
+##  Instalación y ejecución
 
-Cada anime se muestra dentro de una tarjeta (card) con estilo individual.
 
-🧩 Estructura del Proyecto
+# 1. Instalar dependencias
+npm install
 
-![Estructura del Proyecto](./assets/images/estrucutra1.png)
+# 2. Arrancar la aplicación
+npx expo start
 
-📂 Enlaces a los archivos principales
-![Codigo index](./app/index.tsx)
-![Codigo list](./app/list.tsx)
-
-⚙️ Tecnologías Utilizadas
-
-React Native con Expo
-
-TypeScript
-
-Expo Router (para navegación entre pantallas)
-
-FlatList para renderizar la lista de animes
-
-ImageBackground para fondo en portada
-
-Hooks (useState) para el manejo del estado local
+# Aplicacion Hecha Por:
+Gabriel David Gelviz Monterrey.
