@@ -37,3 +37,4 @@ Se definieron 8 categorías fijas, cada una con una imagen asociada:
 | Mecha        | black.jpg       |
 | Deportes     | naruto.jpg      |
 
+[Volver Al README](../README.md)
