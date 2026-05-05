@@ -37,3 +37,5 @@ Cuando un anime está marcado se aplican tres cambios visuales:
 -  Botón ☆/★ por tarjeta que alterna el estado `marcado`
 -  Botón 🗑 por tarjeta que elimina el anime de la lista
 -  Los indicadores numéricos se actualizan automáticamente al marcar o borrar
+
+[Volver Al README](../README.md)
